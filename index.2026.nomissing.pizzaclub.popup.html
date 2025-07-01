@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Cruise - The Ultimate Pizza-Themed Cruise Experience</title>
+    <script src="https://cdn.tailwindcss.com">
+
+// Pizza Club popup modal feedback (no browser alert)
+document.addEventListener('DOMContentLoaded', function() {
+    var form = document.querySelector('#full-menu ~ section form') || document.querySelector('section#newsletter form');
+    var name = document.getElementById('newsletter-name');
+    var email = document.getElementById('newsletter-email');
+    var modal = document.getElementById('pizza-club-success-modal');
+    var closeBtn = document.getElementById('pizza-club-modal-close');
+    var popupTimeout = null;
+    if(form && name && email && modal && closeBtn) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if(email.value && name.value) {
+                modal.classList.remove('hidden');
+                name.value = '';
+                email.value = '';
+                if (popupTimeout) clearTimeout(popupTimeout);
+                popupTimeout = setTimeout(function() {
+                    modal.classList.add('hidden');
+                }, 3000);
+            }
+        });
+        closeBtn.addEventListener('click', function() {
+            modal.classList.add('hidden');
+            if (popupTimeout) clearTimeout(popupTimeout);
+        });
+    }
+});
+
+
+</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff5f0;
+        }
+        
+        .logo-text {
+            font-family: 'Pacifico', cursive;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .pizza-bg {
+            background-color: #f97316;
+        }
+        
+        .pizza-text {
+            color: #f97316;
+        }
+        
+        .pizza-border {
+            border-color: #f97316;
+        }
+        
+        .pizza-button {
+            background-color: #f97316;
+            transition: all 0.3s ease;
+        }
+        
+        .pizza-button:hover {
+            background-color: #ea580c;
+            transform: translateY(-2px);
+        }
+        
+        .pizza-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .pizza-spin {
+            animation: spin 15s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .wave-divider {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+        
+        .wave-divider svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 100px;
+        }
+        
+        .wave-divider .shape-fill {
+            fill: #fff5f0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-pizza-slice text-3xl pizza-text mr-2"></i>
+                        <span class="logo-text text-2xl pizza-text">Pizza Cruise</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-900 hover:text-orange-500 px-3 py-2 text-sm font-medium">Home</a>
+                    <a href="#destinations" class="text-gray-900 hover:text-orange-500 px-3 py-2 text-sm font-medium">Destinations</a>
+                    <a href="#activities" class="text-gray-900 hover:text-orange-500 px-3 py-2 text-sm font-medium">Activities</a>
+                    <a href="#menu" class="text-gray-900 hover:text-orange-500 px-3 py-2 text-sm font-medium">Pizza Menu</a>
+                    <a href="#booking" class="pizza-button text-white px-6 py-2 rounded-full text-sm font-medium">Book Now</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-900 hover:text-orange-500 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-orange-500">Home</a>
+                <a href="#destinations" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-orange-500">Destinations</a>
+                <a href="#activities" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-orange-500">Activities</a>
+                <a href="#menu" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-orange-500">Pizza Menu</a>
+                <a href="#booking" class="block px-3 py-2 text-base font-medium text-white pizza-button rounded-full text-center">Book Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section relative text-white py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Set Sail on a <span class="pizza-text">Pizza</span> Adventure!</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">The world's first pizza-themed cruise where every day is a cheesy, delicious voyage!</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#booking" class="pizza-button text-white px-8 py-3 rounded-full text-lg font-medium hover:shadow-lg">Book Your Cabin</a>
+                <a href="#activities" class="bg-white text-orange-600 px-8 py-3 rounded-full text-lg font-medium hover:bg-gray-100 hover:shadow-lg">Explore Activities</a>
+            </div>
+        </div>
+        <div class="wave-divider">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Pizza Counter -->
+    <section class="pizza-bg text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold mb-6">Pizza Countdown to Departure!</h2>
+                <div class="flex justify-center gap-8">
+                    <div class="text-center">
+                        <div class="text-5xl font-bold" id="days">00</div>
+                        <div class="text-lg">Days</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-5xl font-bold" id="hours">00</div>
+                        <div class="text-lg">Hours</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-5xl font-bold" id="minutes">00</div>
+                        <div class="text-lg">Minutes</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-5xl font-bold" id="seconds">00</div>
+                        <div class="text-lg">Seconds</div>
+                    </div>
+                </div>
+                <p class="mt-8 text-xl">Next departure: <span class="font-bold">June 15, 2026</span> from Miami, FL</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Why Choose Pizza Cruise?</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">A unique vacation experience combining the best of cruising with everyone's favorite food!</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl p-8 text-center pizza-card transition duration-300">
+                    <div class="w-20 h-20 pizza-bg text-white rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-utensils text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Unlimited Pizza</h3>
+                    <p class="text-gray-600">24/7 pizza buffet with over 50 varieties from around the world. Gluten-free and vegan options available!</p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-8 text-center pizza-card transition duration-300">
+                    <div class="w-20 h-20 pizza-bg text-white rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-water text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Exotic Destinations</h3>
+                    <p class="text-gray-600">Visit pizza capitals of the world including Naples, New York, Chicago, and Tokyo's unique pizza spots.</p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-8 text-center pizza-card transition duration-300">
+                    <div class="w-20 h-20 pizza-bg text-white rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-graduation-cap text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Pizza Masterclasses</h3>
+                    <p class="text-gray-600">Learn from world-class pizzaiolos with hands-on workshops in dough tossing, sauce making, and wood-fired baking.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section id="destinations" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Pizza Ports of Call</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Each destination offers unique pizza experiences and cultural immersion</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg pizza-card transition duration-300">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Naples" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Naples, Italy</h3>
+                        <p class="text-gray-600 mb-4">Birthplace of pizza! Visit historic pizzerias and learn authentic Neapolitan techniques.</p>
+                        <div class="flex items-center text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="text-gray-600 ml-2">5.0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg pizza-card transition duration-300">
+                    <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80" alt="New York" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">New York, USA</h3>
+                        <p class="text-gray-600 mb-4">Famous NY-style pizza crawl through Manhattan's best slices and secret spots.</p>
+                        <div class="flex items-center text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="text-gray-600 ml-2">4.7</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg pizza-card transition duration-300">
+                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Tokyo" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Tokyo, Japan</h3>
+                        <p class="text-gray-600 mb-4">Experience Japan's unique pizza creations like okonomiyaki pizza and sushi pizza.</p>
+                        <div class="flex items-center text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="text-gray-600 ml-2">5.0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg pizza-card transition duration-300">
+                    <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Buenos Aires" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Buenos Aires</h3>
+                        <p class="text-gray-600 mb-4">Discover Argentina's fugazzeta pizza and enjoy pizza with Malbec wine pairings.</p>
+                        <div class="flex items-center text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span class="text-gray-600 ml-2">4.2</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section id="activities" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Pizza-Themed Activities</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">More than just eating - immerse yourself in pizza culture!</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-50 rounded-xl p-8 flex flex-col md:flex-row items-center">
+                    <div class="w-32 h-32 pizza-bg text-white rounded-full flex items-center justify-center mb-6 md:mb-0 md:mr-6 pizza-spin">
+                        <i class="fas fa-pizza-slice text-5xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-3">Dough Tossing Championship</h3>
+                        <p class="text-gray-600">Compete in our daily dough tossing contests with prizes for highest toss, most spins, and creative tricks.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-8 flex flex-col md:flex-row items-center">
+                    <div class="w-32 h-32 pizza-bg text-white rounded-full flex items-center justify-center mb-6 md:mb-0 md:mr-6">
+                        <i class="fas fa-wine-glass-alt text-4xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-3">Pizza & Wine Pairing</h3>
+                        <p class="text-gray-600">Expert sommeliers guide you through perfect wine matches for different pizza styles and toppings.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-8 flex flex-col md:flex-row items-center">
+                    <div class="w-32 h-32 pizza-bg text-white rounded-full flex items-center justify-center mb-6 md:mb-0 md:mr-6">
+                        <i class="fas fa-child text-4xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-3">Kids Pizza Academy</h3>
+                        <p class="text-gray-600">Special classes for young chefs to create their own mini pizzas with fun toppings and shapes.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-8 flex flex-col md:flex-row items-center">
+                    <div class="w-32 h-32 pizza-bg text-white rounded-full flex items-center justify-center mb-6 md:mb-0 md:mr-6">
+                        <i class="fas fa-film text-4xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-3">Pizza Movie Nights</h3>
+                        <p class="text-gray-600">Open-air cinema featuring pizza-themed movies with unlimited pizza and popcorn under the stars.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pizza Menu Section -->
+    <section id="menu" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Featured Pizza Menu</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">A sampling of our onboard pizza offerings (menu rotates daily)</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg pizza-card transition duration-300">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1595854341625-f33ee10dbf94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Margherita" class="w-full h-full object-cover">
+                        <div class="absolute top-4 right-4 bg-white text-orange-600 px-3 py-1 rounded-full text-sm font-bold">$14</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Classic Margherita</h3>
+                        <p class="text-gray-600 mb-4">San Marzano tomatoes, fresh mozzarella, basil, and extra virgin olive oil on our signature dough.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex">
+                                <i class="fas fa-pepper-hot text-red-500 mr-1"></i>
+                                <span class="text-sm text-gray-600">Mild</span>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg pizza-card transition duration-300">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1601924582970-9238bcb495d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1976&q=80" alt="Truffle" class="w-full h-full object-cover">
+                        <div class="absolute top-4 right-4 bg-white text-orange-600 px-3 py-1 rounded-full text-sm font-bold">$22</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Truffle Delight</h3>
+                        <p class="text-gray-600 mb-4">Wild mushrooms, truffle oil, fontina cheese, caramelized onions, and fresh thyme.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex">
+                                <i class="fas fa-pepper-hot text-gray-400 mr-1"></i>
+                                <span class="text-sm text-gray-600">None</span>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg pizza-card transition duration-300">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Hawaiian" class="w-full h-full object-cover">
+                        <div class="absolute top-4 right-4 bg-white text-orange-600 px-3 py-1 rounded-full text-sm font-bold">$18</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Tropical Hawaiian</h3>
+                        <p class="text-gray-600 mb-4">Canadian bacon, fresh pineapple, mozzarella, and our special sweet & spicy sauce.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex">
+                                <i class="fas fa-pepper-hot text-yellow-500 mr-1"></i>
+                                <span class="text-sm text-gray-600">Medium</span>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#full-menu" class="pizza-button text-white px-8 py-3 rounded-full text-lg font-medium hover:shadow-lg">View Full Menu</a>
+            </div>
+        </div>
+    </section>
+
+    
+<section id="full-menu" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Full Pizza Menu</h2>
+            <p class="text-xl text-gray-600">Over 50 signature pizzas served on board!</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Classic Margherita</div>
+        <div class="text-orange-600 font-bold mb-2">$13</div>
+        <div class="text-gray-600 text-sm">A signature blend of fresh ingredients, classic and unique flavors.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Spicy Pepperoni</div>
+        <div class="text-orange-600 font-bold mb-2">$12</div>
+        <div class="text-gray-600 text-sm">The chef's favorite with a secret twist.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Truffle Mushroom</div>
+        <div class="text-orange-600 font-bold mb-2">$20</div>
+        <div class="text-gray-600 text-sm">Made with imported Italian cheeses and hand-tossed dough.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Four Cheese</div>
+        <div class="text-orange-600 font-bold mb-2">$25</div>
+        <div class="text-gray-600 text-sm">Topped with a mouthwatering sauce and farm-fresh toppings.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">BBQ Chicken</div>
+        <div class="text-orange-600 font-bold mb-2">$26</div>
+        <div class="text-gray-600 text-sm">Crispy, cheesy, and totally unforgettable.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Vegan Delight</div>
+        <div class="text-orange-600 font-bold mb-2">$22</div>
+        <div class="text-gray-600 text-sm">Artisan toppings, wood-fired crust.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">White Pizza</div>
+        <div class="text-orange-600 font-bold mb-2">$23</div>
+        <div class="text-gray-600 text-sm">A flavor trip from Naples to New York.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Buffalo Chicken</div>
+        <div class="text-orange-600 font-bold mb-2">$23</div>
+        <div class="text-gray-600 text-sm">Unapologetically cheesy, with a crispy finish.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Meat Lovers</div>
+        <div class="text-orange-600 font-bold mb-2">$26</div>
+        <div class="text-gray-600 text-sm">Savory, sweet, and a little bit spicy.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Pesto Paradise</div>
+        <div class="text-orange-600 font-bold mb-2">$19</div>
+        <div class="text-gray-600 text-sm">Toppings piled high on our famous golden crust.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Mediterranean Veggie</div>
+        <div class="text-orange-600 font-bold mb-2">$12</div>
+        <div class="text-gray-600 text-sm">A signature blend of fresh ingredients, classic and unique flavors.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Prosciutto Arugula</div>
+        <div class="text-orange-600 font-bold mb-2">$18</div>
+        <div class="text-gray-600 text-sm">The chef's favorite with a secret twist.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Hawaiian Luau</div>
+        <div class="text-orange-600 font-bold mb-2">$21</div>
+        <div class="text-gray-600 text-sm">Made with imported Italian cheeses and hand-tossed dough.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Greek Feta</div>
+        <div class="text-orange-600 font-bold mb-2">$23</div>
+        <div class="text-gray-600 text-sm">Topped with a mouthwatering sauce and farm-fresh toppings.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Sicilian Square</div>
+        <div class="text-orange-600 font-bold mb-2">$16</div>
+        <div class="text-gray-600 text-sm">Crispy, cheesy, and totally unforgettable.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Eggplant Parm</div>
+        <div class="text-orange-600 font-bold mb-2">$12</div>
+        <div class="text-gray-600 text-sm">Artisan toppings, wood-fired crust.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Tuna & Red Onion</div>
+        <div class="text-orange-600 font-bold mb-2">$19</div>
+        <div class="text-gray-600 text-sm">A flavor trip from Naples to New York.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Pollo Ranch</div>
+        <div class="text-orange-600 font-bold mb-2">$25</div>
+        <div class="text-gray-600 text-sm">Unapologetically cheesy, with a crispy finish.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Capricciosa</div>
+        <div class="text-orange-600 font-bold mb-2">$17</div>
+        <div class="text-gray-600 text-sm">Savory, sweet, and a little bit spicy.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Diavola Fire</div>
+        <div class="text-orange-600 font-bold mb-2">$19</div>
+        <div class="text-gray-600 text-sm">Toppings piled high on our famous golden crust.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Carbonara</div>
+        <div class="text-orange-600 font-bold mb-2">$18</div>
+        <div class="text-gray-600 text-sm">A signature blend of fresh ingredients, classic and unique flavors.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Roasted Garlic Spinach</div>
+        <div class="text-orange-600 font-bold mb-2">$24</div>
+        <div class="text-gray-600 text-sm">The chef's favorite with a secret twist.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Breakfast Pizza</div>
+        <div class="text-orange-600 font-bold mb-2">$18</div>
+        <div class="text-gray-600 text-sm">Made with imported Italian cheeses and hand-tossed dough.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Anchovy Special</div>
+        <div class="text-orange-600 font-bold mb-2">$21</div>
+        <div class="text-gray-600 text-sm">Topped with a mouthwatering sauce and farm-fresh toppings.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Bacon & Corn</div>
+        <div class="text-orange-600 font-bold mb-2">$18</div>
+        <div class="text-gray-600 text-sm">Crispy, cheesy, and totally unforgettable.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Cheeseburger Pizza</div>
+        <div class="text-orange-600 font-bold mb-2">$19</div>
+        <div class="text-gray-600 text-sm">Artisan toppings, wood-fired crust.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Balsamic Bruschetta</div>
+        <div class="text-orange-600 font-bold mb-2">$23</div>
+        <div class="text-gray-600 text-sm">A flavor trip from Naples to New York.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Philly Steak</div>
+        <div class="text-orange-600 font-bold mb-2">$24</div>
+        <div class="text-gray-600 text-sm">Unapologetically cheesy, with a crispy finish.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Chicken Alfredo</div>
+        <div class="text-orange-600 font-bold mb-2">$13</div>
+        <div class="text-gray-600 text-sm">Savory, sweet, and a little bit spicy.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Lemon Ricotta</div>
+        <div class="text-orange-600 font-bold mb-2">$15</div>
+        <div class="text-gray-600 text-sm">Toppings piled high on our famous golden crust.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Pulled Pork</div>
+        <div class="text-orange-600 font-bold mb-2">$25</div>
+        <div class="text-gray-600 text-sm">A signature blend of fresh ingredients, classic and unique flavors.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Broccoli & Ricotta</div>
+        <div class="text-orange-600 font-bold mb-2">$15</div>
+        <div class="text-gray-600 text-sm">The chef's favorite with a secret twist.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Honey Sriracha</div>
+        <div class="text-orange-600 font-bold mb-2">$12</div>
+        <div class="text-gray-600 text-sm">Made with imported Italian cheeses and hand-tossed dough.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Kimchi Fusion</div>
+        <div class="text-orange-600 font-bold mb-2">$25</div>
+        <div class="text-gray-600 text-sm">Topped with a mouthwatering sauce and farm-fresh toppings.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Tikka Masala</div>
+        <div class="text-orange-600 font-bold mb-2">$23</div>
+        <div class="text-gray-600 text-sm">Crispy, cheesy, and totally unforgettable.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Shawarma Pizza</div>
+        <div class="text-orange-600 font-bold mb-2">$26</div>
+        <div class="text-gray-600 text-sm">Artisan toppings, wood-fired crust.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Pineapple Jalapeño</div>
+        <div class="text-orange-600 font-bold mb-2">$19</div>
+        <div class="text-gray-600 text-sm">A flavor trip from Naples to New York.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Miso Mushroom</div>
+        <div class="text-orange-600 font-bold mb-2">$26</div>
+        <div class="text-gray-600 text-sm">Unapologetically cheesy, with a crispy finish.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Pulled Duck</div>
+        <div class="text-orange-600 font-bold mb-2">$15</div>
+        <div class="text-gray-600 text-sm">Savory, sweet, and a little bit spicy.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Spicy Salami</div>
+        <div class="text-orange-600 font-bold mb-2">$14</div>
+        <div class="text-gray-600 text-sm">Toppings piled high on our famous golden crust.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Pumpkin Sage</div>
+        <div class="text-orange-600 font-bold mb-2">$26</div>
+        <div class="text-gray-600 text-sm">A signature blend of fresh ingredients, classic and unique flavors.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Falafel Pizza</div>
+        <div class="text-orange-600 font-bold mb-2">$14</div>
+        <div class="text-gray-600 text-sm">The chef's favorite with a secret twist.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Calabrese</div>
+        <div class="text-orange-600 font-bold mb-2">$12</div>
+        <div class="text-gray-600 text-sm">Made with imported Italian cheeses and hand-tossed dough.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Tartufo Nero</div>
+        <div class="text-orange-600 font-bold mb-2">$14</div>
+        <div class="text-gray-600 text-sm">Topped with a mouthwatering sauce and farm-fresh toppings.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Cacio e Pepe</div>
+        <div class="text-orange-600 font-bold mb-2">$21</div>
+        <div class="text-gray-600 text-sm">Crispy, cheesy, and totally unforgettable.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Garden Supreme</div>
+        <div class="text-orange-600 font-bold mb-2">$22</div>
+        <div class="text-gray-600 text-sm">Artisan toppings, wood-fired crust.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Peri Peri Chicken</div>
+        <div class="text-orange-600 font-bold mb-2">$24</div>
+        <div class="text-gray-600 text-sm">A flavor trip from Naples to New York.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Mac n Cheese Pizza</div>
+        <div class="text-orange-600 font-bold mb-2">$26</div>
+        <div class="text-gray-600 text-sm">Unapologetically cheesy, with a crispy finish.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Cuban Mojo</div>
+        <div class="text-orange-600 font-bold mb-2">$20</div>
+        <div class="text-gray-600 text-sm">Savory, sweet, and a little bit spicy.</div>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow p-4 flex flex-col items-start">
+        <div class="text-lg font-bold mb-1">Nduja Heat</div>
+        <div class="text-orange-600 font-bold mb-2">$14</div>
+        <div class="text-gray-600 text-sm">Toppings piled high on our famous golden crust.</div>
+    </div>
+    
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">What Our Guests Say</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Don't just take our word for it - hear from pizza cruise enthusiasts!</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl p-8">
+                    <div class="flex items-center mb-4">
+                        <div class="flex-shrink-0">
+                            <img class="h-10 w-10 rounded-full" src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah J.">
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium text-gray-900">Sarah J.</p>
+                            <div class="flex space-x-1 text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"As a pizza lover, this was my dream vacation! The pizza-making classes were incredible, and I loved visiting the different pizza destinations. Already booked my next cruise!"</p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-8">
+                    <div class="flex items-center mb-4">
+                        <div class="flex-shrink-0">
+                            <img class="h-10 w-10 rounded-full" src="https://randomuser.me/api/portraits/men/45.jpg" alt="Michael T.">
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium text-gray-900">Michael T.</p>
+                            <div class="flex space-x-1 text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"I came for the pizza but stayed for the amazing people and activities. The dough tossing competition was hilarious, and the unlimited pizza is no joke - I ate my weight in slices!"</p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-8">
+                    <div class="flex items-center mb-4">
+                        <div class="flex-shrink-0">
+                            <img class="h-10 w-10 rounded-full" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Lisa M.">
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium text-gray-900">Lisa M.</p>
+                            <div class="flex space-x-1 text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"Perfect family vacation! Our kids loved the pizza academy, and we appreciated the gluten-free options. The staff went above and beyond to accommodate dietary needs."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="py-20 pizza-bg text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+                <div class="mb-12 lg:mb-0">
+                    <h2 class="text-3xl font-bold mb-6">Ready for the Ultimate Pizza Adventure?</h2>
+                    <p class="text-xl mb-8">Book your cabin now for our next departure on June 15, 2026. Limited cabins available!</p>
+                    <div class="bg-white bg-opacity-20 rounded-xl p-6 mb-8">
+                        <h3 class="text-xl font-bold mb-4">Special Early Bird Offer</h3>
+                        <p class="mb-4">Book before March 1st and receive:</p>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle mt-1 mr-2"></i>
+                                <span>15% off your entire booking</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle mt-1 mr-2"></i>
+                                <span>Free pizza-making kit</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle mt-1 mr-2"></i>
+                                <span>Priority boarding</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-phone-volume text-2xl mr-4"></i>
+                        <div>
+                            <p class="text-sm">Need help booking?</p>
+                            <p class="text-xl font-bold">1-800-PIZZA-CRUISE</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-xl p-8 text-gray-800">
+                    <h3 class="text-2xl font-bold mb-6 text-center pizza-text">Book Your Cabin</h3>
+                    <form>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Full Name</label>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-orange-500" id="name" type="text" placeholder="Your name">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-orange-500" id="email" type="email" placeholder="your@email.com">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="cabin">Cabin Type</label>
+                            <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-orange-500" id="cabin">
+                                <option>Interior Cabin - $899</option>
+                                <option>Oceanview Cabin - $1,299</option>
+                                <option>Balcony Cabin - $1,699</option>
+                                <option>Pizza Suite - $2,499</option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="guests">Number of Guests</label>
+                            <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-orange-500" id="guests">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <button class="pizza-button text-white font-bold py-3 px-6 rounded-full w-full hover:shadow-lg" type="button">
+                                Check Availability
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Everything you need to know about Pizza Cruise</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="border-b border-gray-200 py-4">
+                    <button class="faq-question flex justify-between items-center w-full text-left font-medium text-gray-900 hover:text-orange-500 focus:outline-none">
+                        <span>Is there really unlimited pizza?</span>
+                        <i class="fas fa-plus text-orange-500"></i>
+                    </button>
+                    <div class="faq-answer hidden mt-2 text-gray-600">
+                        <p>Absolutely! Our 24/7 pizza buffet offers unlimited slices of all our pizza varieties. We do ask that guests be considerate and only take what they can eat to minimize waste.</p>
+                    </div>
+                </div>
+                
+                <div class="border-b border-gray-200 py-4">
+                    <button class="faq-question flex justify-between items-center w-full text-left font-medium text-gray-900 hover:text-orange-500 focus:outline-none">
+                        <span>What dietary restrictions can you accommodate?</span>
+                        <i class="fas fa-plus text-orange-500"></i>
+                    </button>
+                    <div class="faq-answer hidden mt-2 text-gray-600">
+                        <p>We offer gluten-free, vegan, and dairy-free pizza options at all meals. Our chefs can also accommodate most other dietary needs with advance notice - just let us know when you book!</p>
+                    </div>
+                </div>
+                
+                <div class="border-b border-gray-200 py-4">
+                    <button class="faq-question flex justify-between items-center w-full text-left font-medium text-gray-900 hover:text-orange-500 focus:outline-none">
+                        <span>Are there activities for kids?</span>
+                        <i class="fas fa-plus text-orange-500"></i>
+                    </button>
+                    <div class="faq-answer hidden mt-2 text-gray-600">
+                        <p>Yes! We have a dedicated Kids Pizza Academy with age-appropriate cooking classes, pizza-themed arts and crafts, and supervised play areas. Our staff are all trained in child safety.</p>
+                    </div>
+                </div>
+                
+                <div class="border-b border-gray-200 py-4">
+                    <button class="faq-question flex justify-between items-center w-full text-left font-medium text-gray-900 hover:text-orange-500 focus:outline-none">
+                        <span>What's included in the cruise price?</span>
+                        <i class="fas fa-plus text-orange-500"></i>
+                    </button>
+                    <div class="faq-answer hidden mt-2 text-gray-600">
+                        <p>Your fare includes accommodations, all meals (with unlimited pizza), non-alcoholic beverages, most onboard activities, and port taxes. Alcohol, shore excursions, spa services, and specialty dining are extra.</p>
+                    </div>
+                </div>
+                
+                <div class="border-b border-gray-200 py-4">
+                    <button class="faq-question flex justify-between items-center w-full text-left font-medium text-gray-900 hover:text-orange-500 focus:outline-none">
+                        <span>Can I get pizza delivered to my cabin?</span>
+                        <i class="fas fa-plus text-orange-500"></i>
+                    </button>
+                    <div class="faq-answer hidden mt-2 text-gray-600">
+                        <p>Of course! Our 24-hour room service offers a selection of pizzas that can be delivered to your cabin. There's a small delivery fee between midnight and 6am.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:w-1/2 pizza-bg text-white p-12 flex items-center">
+                        <div>
+                            <h3 class="text-3xl font-bold mb-4">Join Our Pizza Club</h3>
+                            <p class="text-xl mb-6">Get exclusive offers, pizza recipes, and cruise updates delivered to your inbox.</p>
+                            <div class="flex space-x-4">
+                                <a href="#" class="text-white hover:text-gray-200"><i class="fab fa-facebook-f text-2xl"></i></a>
+                                <a href="#" class="text-white hover:text-gray-200"><i class="fab fa-instagram text-2xl"></i></a>
+                                <a href="#" class="text-white hover:text-gray-200"><i class="fab fa-twitter text-2xl"></i></a>
+                                <a href="#" class="text-white hover:text-gray-200"><i class="fab fa-pinterest-p text-2xl"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 p-12">
+                        <form>
+                            <div class="mb-6">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="newsletter-name">Name</label>
+                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-orange-500" id="newsletter-name" type="text" placeholder="Your name">
+                            </div>
+                            <div class="mb-6">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="newsletter-email">Email</label>
+                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-orange-500" id="newsletter-email" type="email" placeholder="your@email.com">
+                            </div>
+                            <div class="flex items-center">
+                                <input id="newsletter-checkbox" type="checkbox" class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded">
+                                <label for="newsletter-checkbox" class="ml-2 block text-sm text-gray-700">
+                                    I agree to receive emails about pizza and cruise deals
+                                </label>
+                            </div>
+                            <button id="pizza-club-submit" class="pizza-button text-white font-bold py-3 px-6 rounded-full w-full mt-6 hover:shadow-lg" type="submit">
+                                Subscribe Now
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-pizza-slice text-2xl pizza-text mr-2"></i>
+                        <span class="logo-text text-xl pizza-text">Pizza Cruise</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">The ultimate pizza adventure on the high seas!</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="#destinations" class="text-gray-400 hover:text-white">Destinations</a></li>
+                        <li><a href="#activities" class="text-gray-400 hover:text-white">Activities</a></li>
+                        <li><a href="#menu" class="text-gray-400 hover:text-white">Pizza Menu</a></li>
+                        <li><a href="#booking" class="text-gray-400 hover:text-white">Booking</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3"></i>
+                            <span>123 Pizza Lane, Miami, FL 33101</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-3"></i>
+                            <span>1-800-PIZZA-CRUISE</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-3"></i>
+                            <span>info@pizzacruise.com</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Newsletter</h3>
+                    <p class="text-gray-400 mb-4">Subscribe for pizza tips and cruise deals!</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="bg-gray-800 text-white px-4 py-2 rounded-l focus:outline-none focus:ring-1 focus:ring-orange-500 w-full">
+                        <button class="pizza-button px-4 rounded-r">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 Pizza Cruise. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<!-- Pizza Club Success Modal -->
+<div id="pizza-club-success-modal" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 hidden">
+    <div class="bg-white rounded-xl shadow-xl p-8 max-w-xs w-full text-center relative border-4 border-orange-300 animate-bounce-in">
+        <button id="pizza-club-modal-close" class="absolute top-3 right-3 text-gray-400 hover:text-orange-500 text-2xl">&times;</button>
+        <i class="fas fa-pizza-slice text-4xl pizza-text mb-4"></i>
+        <h3 class="text-2xl font-bold mb-2 text-orange-600">Welcome to the Pizza Club!</h3>
+        <p class="text-gray-700 mb-1">You’re now on our list for exclusive deals, recipes, and cruise updates 🍕🎉</p>
+    </div>
+</div>
+<style>
+@keyframes bounce-in {
+    0% { transform: scale(0.8) translateY(50px); opacity: 0; }
+    60% { transform: scale(1.05) translateY(-10px); opacity: 1;}
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+.animate-bounce-in { animation: bounce-in 0.5s cubic-bezier(.65,-0.2,.55,1.6); }
+</style>
+
+
+    <!-- Floating Pizza Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button id="pizza-button" class="w-16 h-16 pizza-bg text-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl focus:outline-none">
+            <i class="fas fa-pizza-slice text-2xl"></i>
+        </button>
+    </div>
+
+    <!-- Pizza Modal -->
+    <div id="pizza-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-md w-full p-6 relative">
+            <button id="close-modal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <div class="text-center">
+                <i class="fas fa-pizza-slice text-5xl pizza-text mb-4"></i>
+                <h3 class="text-2xl font-bold mb-2">Hungry for Pizza?</h3>
+                <p class="text-gray-600 mb-6">Our pizza experts are standing by to answer your questions about Pizza Cruise!</p>
+                <a href="#booking" class="pizza-button text-white px-6 py-3 rounded-full inline-block font-medium">Book Your Cruise Now</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // FAQ accordion
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('i');
+                
+                // Toggle answer visibility
+                answer.classList.toggle('hidden');
+                
+                // Toggle icon between plus and minus
+                if (icon.classList.contains('fa-plus')) {
+                    icon.classList.remove('fa-plus');
+                    icon.classList.add('fa-minus');
+                } else {
+                    icon.classList.remove('fa-minus');
+                    icon.classList.add('fa-plus');
+                }
+            });
+        });
+        
+        // Pizza modal
+        const pizzaButton = document.getElementById('pizza-button');
+        const pizzaModal = document.getElementById('pizza-modal');
+        const closeModal = document.getElementById('close-modal');
+        
+        pizzaButton.addEventListener('click', () => {
+            pizzaModal.classList.remove('hidden');
+        });
+        
+        closeModal.addEventListener('click', () => {
+            pizzaModal.classList.add('hidden');
+        });
+        
+        // Countdown timer
+        function updateCountdown() {
+            const departureDate = new Date('June 15, 2026 00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = departureDate - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=Beelzelbub/pizza-cruise" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p></body>
+</html>
